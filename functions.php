@@ -28,14 +28,14 @@ function cml_get_default_language_id() {
 /**
  * Restituisco un array contenente le informazioni sulle lingue configurate
  *
- * La struttura dell'array è la seguente:
+ * La struttura dell'array ï¿½ la seguente:
  *	id - id della lingua
- *	cml_default - 1 o 0 a seconda se la lingua è quella predefinita o meno
+ *	cml_default - 1 o 0 a seconda se la lingua ï¿½ quella predefinita o meno
  *	cml_flag    - nome della bandiera
  *	cml_notice_post - avviso "articolo"
  *	cml_notice_page - avviso "pagina"
  *	cml_notice_category - avviso "categoria"
- *	cml_category_name - nome della categoria a cui è collegata la lingua
+ *	cml_category_name - nome della categoria a cui ï¿½ collegata la lingua
  *	cml_category_id - id della categoria collegata alla lingua
  *	cml_category_slug - abbreviazione della categoria collegata alla lingua
  *	cml_locale - locale wordpress della lingua
@@ -118,10 +118,10 @@ function cml_get_flags_count() {
 }
 
 /**
- * Restituisco il menù da utilizzare in base alla lingua "attuale"
+ * Restituisco il menï¿½ da utilizzare in base alla lingua "attuale"
  */
 function cml_get_menu() {
-  //Restituisco il nome del menù da utilizzare a seconda della lingua
+  //Restituisco il nome del menï¿½ da utilizzare a seconda della lingua
   $lang = cml_get_current_language();
 
   return "cml_menu_" . $lang->cml_language_slug;
@@ -144,9 +144,9 @@ function cml_get_menu_name($name) {
 }
 
 /**
- * Controllo se la lingua attuale è quella di default
+ * Controllo se la lingua attuale ï¿½ quella di default
  *
- * @return True/False a seconda se la lingua corrente è quella impostata come predefinita
+ * @return True/False a seconda se la lingua corrente ï¿½ quella impostata come predefinita
  */
 function cml_is_default_lang($lang = null) {
   global $wpCeceppaML;
@@ -168,9 +168,9 @@ function cml_is_default_lang($lang = null) {
  *			"tiny" - 20x12
  *			"small" - 80x55
  * @param "class_nam" - nome della classe da assegnare alla lista <ul></ul>
- * @param "echo" - indica se false non esegue il costrutto echo ma ritornerò la lista <ul> che ho creato
+ * @param "echo" - indica se false non esegue il costrutto echo ma ritornerï¿½ la lista <ul> che ho creato
  * @param "linked" - se true: la bandiera deve restituire il link all'articolo nelle varie lingue (se presente),
-* 				false: la bandiera punterà alla home aggiungendo il suffisso "?lang=##"
+* 				false: la bandiera punterï¿½ alla home aggiungendo il suffisso "?lang=##"
  */
 function cml_show_flags( $show = "flag", $size = "tiny", $class_name = "cml_flags", $image_class = "", $echo = true, $linked = true, $only_existings = false, $sort = false ) {
   global $wpdb, $wpCeceppaML;
@@ -279,7 +279,7 @@ function cml_get_language_info($id = null) {
 }
 
 /**
- * restiutisco l'avviso che l'articolo è disponibile nella lingua specificata
+ * restiutisco l'avviso che l'articolo ï¿½ disponibile nella lingua specificata
  *
  * @param $lang_slug - slug della lingua
  *
@@ -406,7 +406,7 @@ function cml_get_current_language_id() {
 function cml_is_homepage() {
   if( is_category() || is_archive() ) return false;
 
-  //Controllo se è stata impostata una pagina "statica" se l'id di questa è = a quello della statica
+  //Controllo se ï¿½ stata impostata una pagina "statica" se l'id di questa ï¿½ = a quello della statica
   if( cml_use_static_page() ) :
     $static_id = get_option( "page_for_posts" ) + get_option( "page_on_front" );
 
@@ -415,7 +415,7 @@ function cml_is_homepage() {
     if( ! empty( $the_id ) ) :
       if( $the_id == $static_id ) return true;	//E' proprio lei...
       
-      //Mica è una traduzione?
+      //Mica ï¿½ una traduzione?
       $linked = cml_get_linked_post( $lang_id, null, $the_id , cml_get_default_language_id() );
       if( !empty($linked) ) return $linked == $static_id;
     endif;
@@ -434,7 +434,7 @@ function cml_is_homepage() {
 function cml_get_page_id_by_path($url, $types = null) {
   $plinks = explode( "/", $url );
 
-  //Se l'ultimo elemento è vuoto, lo cancello ;)
+  //Se l'ultimo elemento ï¿½ vuoto, lo cancello ;)
   if( substr($url, -1) == "/" ) array_pop( $plinks );
   $title = array_pop( $plinks );
 
@@ -478,7 +478,7 @@ function cml_get_language_by_post_id( $id ) {
   
   $lang_id = $wpCeceppaML->get_language_id_by_post_id( $id );
   
-  return cml_get_language_info( $id );
+  return cml_get_language_info( $lang_id );
 }
 
 function cml_set_language_of_post( $id, $lang_id ) {
@@ -504,7 +504,7 @@ function cml_get_the_link( $result, $linked = true, $only_existings = false ) {
   global $wpCeceppaML, $_cml_settings;
 
   if( cml_is_homepage() && ! in_the_loop() ) {
-    //Se stò nella home vuol dire che ho scelto come metodo di reindirizzamento &lang
+    //Se stï¿½ nella home vuol dire che ho scelto come metodo di reindirizzamento &lang
     $link = $wpCeceppaML->get_home_url( $result->cml_language_slug );
   } else {
     /* Collego la categoria della lingua attuale con quella della linga della bandierina */
@@ -543,7 +543,7 @@ function cml_get_the_link( $result, $linked = true, $only_existings = false ) {
         //Mi serve a "forzare" lo slug corretto nel link
         $wpCeceppaML->force_category_lang( $result->id );
 
-        //Mi recupererà il link tradotto dal mio plugin ;)
+        //Mi recupererï¿½ il link tradotto dal mio plugin ;)
         $link = get_category_link( $cat_id );
       endif;
 
@@ -554,11 +554,11 @@ function cml_get_the_link( $result, $linked = true, $only_existings = false ) {
       $link = add_query_arg( array( "lang" => $result->cml_language_slug ) );
     endif;
 
-    /* Controllo se è stata impostata una pagina statica,
-	perché così invece di restituire il link dell'articolo collegato
-	aggiungo il più "bello" ?lang=## alla fine della home.
+    /* Controllo se ï¿½ stata impostata una pagina statica,
+	perchï¿½ cosï¿½ invece di restituire il link dell'articolo collegato
+	aggiungo il piï¿½ "bello" ?lang=## alla fine della home.
 
-	Se non ho trovato nesuna traduzione per l'articolo, la bandiera punterà alla homepage
+	Se non ho trovato nesuna traduzione per l'articolo, la bandiera punterï¿½ alla homepage
     */
     if( empty( $link ) && ! $only_existings ) {
       //If post doesn't exists in current language I'll return the link to default language, if exists :)
